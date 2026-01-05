@@ -49,7 +49,7 @@
   services.xserver.enable = true;
 
   # Enable the LXQT Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.startx.enable = true;
   services.xserver.desktopManager.lxqt.enable = true;
 
   # Configure keymap in X11
