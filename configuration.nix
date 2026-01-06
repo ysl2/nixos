@@ -45,12 +45,21 @@
     LC_TIME = "zh_CN.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  programs.niri.enable = true;
+  hardware.graphics.enable = true;
 
-  # Enable the LXQT Desktop Environment.
-  services.xserver.displayManager.startx.enable = true;
-  services.xserver.desktopManager.lxqt.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
+    ];
+    config = {
+      common = {
+        default = [ "gtk" ];
+      };
+    };
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -114,6 +123,10 @@
     lazygit
     lf
     tmux
+    alacritty
+    fuzzel
+    waybar
+    firefox
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
