@@ -127,6 +127,12 @@
     fuzzel
     waybar
     firefox
+    brightnessctl
+    pulsemixer
+  ];
+
+  fonts.packages = with pkgs; [
+    font-awesome
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
