@@ -129,6 +129,7 @@
     firefox
     brightnessctl
     pulsemixer
+    fastfetch
   ];
 
   fonts.packages = with pkgs; [
