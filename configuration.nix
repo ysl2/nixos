@@ -141,7 +141,6 @@
     tmux
     alacritty
     fuzzel
-    waybar
     firefox
     brightnessctl
     pulsemixer
