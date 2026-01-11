@@ -146,6 +146,7 @@
     pulsemixer
     fastfetch
     wl-clipboard
+    xwayland-satellite
   ];
 
   fonts.packages = with pkgs; [
@@ -153,6 +154,15 @@
   ];
 
   services.v2raya.enable = true;
+  programs.clash-verge.enable = true;
+  programs.xwayland.enable = true;
+
+  security.wrappers.clash-verge = {
+    owner = "root";
+    group = "root";
+    capabilities = "cap_net_admin,cap_net_bind_service=+eip";
+    source = "${pkgs.clash-verge-rev}/bin/clash-verge";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
