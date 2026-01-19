@@ -155,6 +155,7 @@
     chafa
     starship
     atuin
+    patchelf
   ];
 
   fonts.packages = with pkgs; [
