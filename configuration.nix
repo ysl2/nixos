@@ -109,9 +109,12 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  programs.zsh.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.songliyu = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     description = "songliyu";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
@@ -150,6 +153,8 @@
     cargo
     gcc
     chafa
+    starship
+    atuin
   ];
 
   fonts.packages = with pkgs; [
