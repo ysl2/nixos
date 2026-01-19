@@ -156,6 +156,7 @@
     starship
     atuin
     patchelf
+    file
   ];
 
   fonts.packages = with pkgs; [
