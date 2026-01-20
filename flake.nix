@@ -2,7 +2,7 @@
   description = "My NixOS Flake Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     noctalia.url = "github:noctalia-dev/noctalia-shell";
@@ -30,7 +30,7 @@
 
               programs.noctalia-shell.enable = true;
 
-	      home.stateVersion = "25.11";
+	      home.stateVersion = "26.05";
 
               gtk = {
                 enable = true;
