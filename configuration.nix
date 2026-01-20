@@ -159,6 +159,7 @@
     file
     opencode
     bun
+    python3
   ];
 
   fonts.packages = with pkgs; [
