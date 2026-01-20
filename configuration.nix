@@ -157,6 +157,8 @@
     atuin
     patchelf
     file
+    opencode
+    bun
   ];
 
   fonts.packages = with pkgs; [
