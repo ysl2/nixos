@@ -172,6 +172,7 @@
     opencode
     bun
     python3
+    zotero
   ];
 
   fonts.packages = with pkgs; [
