@@ -173,6 +173,7 @@
     bun
     python3
     zotero
+    cloudflared
   ];
 
   fonts.packages = with pkgs; [
