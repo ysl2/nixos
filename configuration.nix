@@ -174,6 +174,7 @@
     python3
     zotero
     cloudflared
+    ncdu
   ];
 
   fonts.packages = with pkgs; [
