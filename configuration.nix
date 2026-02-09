@@ -173,7 +173,7 @@
     atuin
     patchelf
     file
-    opencode
+    claude-code
     bun
     python3
     zotero
