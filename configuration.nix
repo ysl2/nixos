@@ -178,6 +178,7 @@
     cloudflared
     ncdu
     udiskie
+    devbox
   ];
 
   fonts.packages = with pkgs; [
