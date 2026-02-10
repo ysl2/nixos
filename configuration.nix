@@ -63,6 +63,16 @@
     INPUT_METHOD = lib.mkForce "fcitx5";
   };
 
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri";
+	user = "greeter";
+      };
+    };
+  };
+
   programs.niri.enable = true;
   hardware.graphics = {
     enable = true;
