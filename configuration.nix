@@ -161,6 +161,22 @@
 
   services.trezord.enable = true;
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      tradingview = prev.tradingview.overrideAttrs (oldAttrs: {
+        nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [ final.makeWrapper ];
+        postFixup = (oldAttrs.postFixup or "") + ''
+          wrapProgram $out/bin/tradingview \
+            --add-flags "--ozone-platform-hint=auto --enable-features=UseOzonePlatform --ozone-platform=wayland" \
+            --set http_proxy "http://127.0.0.1:20171" \
+            --set https_proxy "http://127.0.0.1:20171" \
+            --set all_proxy "socks5://127.0.0.1:20171" \
+            --set no_proxy "127.0.0.1,localhost,internal.domain"
+        '';
+      });
+    })
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -195,6 +211,7 @@
     ncdu
     udiskie
     devbox
+    tradingview
   ];
 
   fonts.packages = with pkgs; [
