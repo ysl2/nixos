@@ -188,7 +188,7 @@
     lazygit
     lf
     tmux
-    alacritty
+    kitty
     fuzzel
     firefox
     brightnessctl
