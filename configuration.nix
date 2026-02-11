@@ -212,6 +212,7 @@
     udiskie
     devbox
     tradingview
+    imv
   ];
 
   fonts.packages = with pkgs; [
