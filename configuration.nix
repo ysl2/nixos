@@ -18,8 +18,15 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.proxy = {
+    default = "http://127.0.0.1:20171";
+    httpsProxy = "http://127.0.0.1:20171";
+    noProxy = "127.0.0.1,localhost,internal.domain";
+  };
+
+  environment.sessionVariables = {
+    all_proxy = lib.mkForce "socks5://127.0.0.1:20172";
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -262,7 +269,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.substituters = [
-    "https://mirror.sjtu.edu.cn/nix-channels/store"
+    # "https://mirror.sjtu.edu.cn/nix-channels/store"
     "https://cache.nixos.org"
   ];
 }
