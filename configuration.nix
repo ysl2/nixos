@@ -231,6 +231,8 @@
     tradingview
     imv
     telegram-desktop
+    codex
+    gemini-cli
   ];
 
   fonts.packages = with pkgs; [
