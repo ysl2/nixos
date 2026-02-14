@@ -18,15 +18,8 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
-  networking.proxy = {
-    default = "http://127.0.0.1:20171";
-    httpsProxy = "http://127.0.0.1:20171";
-    noProxy = "127.0.0.1,localhost,internal.domain";
-  };
-
-  environment.sessionVariables = {
-    all_proxy = lib.mkForce "socks5://127.0.0.1:20172";
-  };
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -52,67 +45,18 @@
     LC_TIME = "zh_CN.UTF-8";
   };
 
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-gtk
-      qt6Packages.fcitx5-chinese-addons
-    ];
-    fcitx5.waylandFrontend = true;
-  };
+  # Enable the X11 windowing system.
+  # services.xserver.enable = true;
 
-  environment.variables = {
-    GTK_IM_MODULE = lib.mkForce "fcitx5";
-    QT_IM_MODULE = lib.mkForce "fcitx5";
-    XMODIFIERS = lib.mkForce "@im=fcitx5";
-    SDL_IM_MODULE = lib.mkForce "fcitx5";
-    INPUT_METHOD = lib.mkForce "fcitx5";
-  };
-
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri";
-	user = "greeter";
-      };
-    };
-  };
-
-  programs.niri.enable = true;
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    open = false;
-  };
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-gnome
-    ];
-    config = {
-      common = {
-        default = [ "gtk" ];
-      };
-    };
-  };
+  # Enable the LXQT Desktop Environment.
+  # services.xserver.displayManager.lightdm.enable = true;
+  # services.xserver.desktopManager.lxqt.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
-    options = "caps:swapescape";
   };
-  console.useXkbConfig = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -136,14 +80,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  security.sudo.wheelNeedsPassword = false;
-
-  programs.zsh.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.songliyu = {
     isNormalUser = true;
-    shell = pkgs.zsh;
     description = "songliyu";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
@@ -154,93 +93,16 @@
   # Install firefox.
   programs.firefox.enable = true;
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  programs.nix-ld.enable = true;
-
-  services.udisks2.enable = true;
-
-  services.trezord.enable = true;
-
-  nixpkgs.overlays = [
-    (final: prev: {
-      tradingview = prev.tradingview.overrideAttrs (oldAttrs: {
-        nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [ final.makeWrapper ];
-        postFixup = (oldAttrs.postFixup or "") + ''
-          wrapProgram $out/bin/tradingview \
-            --add-flags "--ozone-platform-hint=auto --enable-features=UseOzonePlatform --ozone-platform=wayland" \
-            --set http_proxy "http://127.0.0.1:20171" \
-            --set https_proxy "http://127.0.0.1:20171" \
-            --set all_proxy "socks5://127.0.0.1:20171" \
-            --set no_proxy "127.0.0.1,localhost,internal.domain"
-        '';
-      });
-      telegram-desktop = prev.telegram-desktop.overrideAttrs (oldAttrs: {
-        nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [ final.makeWrapper ];
-        postFixup = (oldAttrs.postFixup or "") + ''
-          wrapProgram $out/bin/Telegram \
-            --set http_proxy "http://127.0.0.1:20171" \
-            --set https_proxy "http://127.0.0.1:20171" \
-            --set all_proxy "socks5://127.0.0.1:20171" \
-            --set no_proxy "127.0.0.1,localhost,internal.domain"
-        '';
-      });
-    })
-  ];
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    git
-    lsof
-    gnumake
-    lazygit
-    lf
-    tmux
-    kitty
-    fuzzel
-    firefox
-    brightnessctl
-    pulsemixer
-    fastfetch
-    wl-clipboard
-    nodejs
-    cargo
-    gcc
-    chafa
-    starship
-    atuin
-    patchelf
-    file
-    claude-code
-    bun
-    python3
-    zotero
-    cloudflared
-    ncdu
-    udiskie
-    devbox
-    tradingview
-    imv
-    telegram-desktop
-    codex
-    gemini-cli
-  ];
-
-  fonts.packages = with pkgs; [
-    nerd-fonts.fira-code
-    font-awesome
-  ];
-
-  services.v2raya.enable = true;
+  # environment.systemPackages = with pkgs; [
+  #   # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #   # wget
+  # ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -269,10 +131,158 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "26.05"; # Did you read the comment?
 
+  # ===== CUSTOM CONFIGURATIONS =====
+
+  console.useXkbConfig = true;
+
+  environment.sessionVariables = {
+    all_proxy = lib.mkForce "socks5://127.0.0.1:20172";
+  };
+  environment.variables = {
+    GTK_IM_MODULE = lib.mkForce "fcitx5";
+    QT_IM_MODULE = lib.mkForce "fcitx5";
+    XMODIFIERS = lib.mkForce "@im=fcitx5";
+    SDL_IM_MODULE = lib.mkForce "fcitx5";
+    INPUT_METHOD = lib.mkForce "fcitx5";
+  };
+  environment.systemPackages = with pkgs; [
+    atuin
+    bun
+    brightnessctl
+    cargo
+    chafa
+    claude-code
+    cloudflared
+    codex
+    devbox
+    file
+    firefox
+    fastfetch
+    gcc
+    gemini-cli
+    git
+    gnumake
+    imv
+    kitty
+    lazygit
+    lf
+    lsof
+    nodejs
+    ncdu
+    patchelf
+    pulsemixer
+    python3
+    starship
+    tmux
+    tradingview
+    telegram-desktop
+    udiskie
+    wget
+    wl-clipboard
+    zotero
+  ];
+
+  fonts.packages = with pkgs; [
+    font-awesome
+    nerd-fonts.fira-code
+  ];
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  hardware.nvidia = {
+    modesetting.enable = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    open = false;
+  };
+
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-gtk
+      qt6Packages.fcitx5-chinese-addons
+    ];
+    fcitx5.waylandFrontend = true;
+  };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.substituters = [
     # "https://mirror.sjtu.edu.cn/nix-channels/store"
     "https://cache.nixos.org"
   ];
-}
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      telegram-desktop = prev.telegram-desktop.overrideAttrs (oldAttrs: {
+        nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [ final.makeWrapper ];
+        postFixup = (oldAttrs.postFixup or "") + ''
+          wrapProgram $out/bin/Telegram \
+            --set http_proxy "http://127.0.0.1:20171" \
+            --set https_proxy "http://127.0.0.1:20171" \
+            --set all_proxy "socks5://127.0.0.1:20171" \
+            --set no_proxy "127.0.0.1,localhost,internal.domain"
+        '';
+      });
+      tradingview = prev.tradingview.overrideAttrs (oldAttrs: {
+        nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [ final.makeWrapper ];
+        postFixup = (oldAttrs.postFixup or "") + ''
+          wrapProgram $out/bin/tradingview \
+            --add-flags "--ozone-platform-hint=auto --enable-features=UseOzonePlatform --ozone-platform=wayland" \
+            --set http_proxy "http://127.0.0.1:20171" \
+            --set https_proxy "http://127.0.0.1:20171" \
+            --set all_proxy "socks5://127.0.0.1:20171" \
+            --set no_proxy "127.0.0.1,localhost,internal.domain"
+        '';
+      });
+    })
+  ];
+
+  networking.proxy = {
+    default = "http://127.0.0.1:20171";
+    httpsProxy = "http://127.0.0.1:20171";
+    noProxy = "127.0.0.1,localhost,internal.domain";
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+  programs.niri.enable = true;
+  programs.nix-ld.enable = true;
+  programs.zsh.enable = true;
+
+  security.sudo.wheelNeedsPassword = false;
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri";
+        user = "greeter";
+      };
+    };
+  };
+  services.trezord.enable = true;
+  services.udisks2.enable = true;
+  services.v2raya.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.xkb.options = "caps:swapescape";
+
+  users.users.songliyu.shell = pkgs.zsh;
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
+    ];
+    config = {
+      common = {
+        default = [ "gtk" ];
+      };
+    };
+  };
+}

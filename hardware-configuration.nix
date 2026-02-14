@@ -24,15 +24,19 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  swapDevices = [ ];
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # ===== CUSTOM CONFIGURATIONS =====
+
+  # boot.kernelParams = [ "libata.force=pio4,noncq" "libata.noacpi=1" "ahci.mobile_lpm_policy=1" ];
+
   # fileSystems."/mnt/data" = {
   #   device = "/dev/disk/by-uuid/ec99be68-d52b-4d88-aed6-dec9abf4ad4b";
   #   fsType = "ext4";
   #   options = [ "defaults" "noatime" "nofail" ];
   # };
-  # boot.kernelParams = [ "libata.force=pio4,noncq" "libata.noacpi=1" "ahci.mobile_lpm_policy=1" ];
 
-  swapDevices = [ ];
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
