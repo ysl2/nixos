@@ -31,6 +31,7 @@
 
   # ===== CUSTOM CONFIGURATIONS =====
 
+  boot.consoleLogLevel = 3;
   # boot.kernelParams = [ "libata.force=pio4,noncq" "libata.noacpi=1" "ahci.mobile_lpm_policy=1" ];
 
   # fileSystems."/mnt/data" = {
