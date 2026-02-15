@@ -191,6 +191,9 @@
   fonts.packages = with pkgs; [
     font-awesome
     nerd-fonts.fira-code
+    noto-fonts-cjk-sans
+    wqy_microhei
+    wqy_zenhei
   ];
 
   hardware.graphics = {
