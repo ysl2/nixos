@@ -179,6 +179,7 @@
     tradingview
     telegram-desktop
     udiskie
+    wechat
     wget
     wl-clipboard
     wpsoffice
