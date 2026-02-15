@@ -154,6 +154,7 @@
     brightnessctl
     cargo
     chafa
+    chromium
     claude-code
     cloudflared
     codex
