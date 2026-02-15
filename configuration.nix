@@ -182,6 +182,7 @@
     wget
     wl-clipboard
     wpsoffice
+    xwayland-satellite
     zotero
   ];
 
