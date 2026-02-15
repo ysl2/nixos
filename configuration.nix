@@ -181,6 +181,7 @@
     udiskie
     wget
     wl-clipboard
+    wpsoffice
     zotero
   ];
 
