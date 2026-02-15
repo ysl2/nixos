@@ -146,6 +146,7 @@
     XMODIFIERS = lib.mkForce "@im=fcitx5";
     SDL_IM_MODULE = lib.mkForce "fcitx5";
     INPUT_METHOD = lib.mkForce "fcitx5";
+    PATH = ["/home/songliyu/.vocal"];
   };
   environment.systemPackages = with pkgs; [
     atuin
