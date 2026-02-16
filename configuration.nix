@@ -170,7 +170,9 @@
     kitty
     lazygit
     lf
+    libreoffice
     lsof
+    mupdf
     nodejs
     ncdu
     patchelf
