@@ -188,6 +188,7 @@
     wl-clipboard
     wpsoffice
     xwayland-satellite
+    zathura
     zotero
   ];
 
