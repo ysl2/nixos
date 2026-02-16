@@ -183,6 +183,7 @@
     tradingview
     telegram-desktop
     udiskie
+    unzip
     wechat
     wget
     wl-clipboard
