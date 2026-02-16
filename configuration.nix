@@ -173,6 +173,7 @@
     libreoffice
     lsof
     mupdf
+    ntfs3g
     nodejs
     ncdu
     patchelf
