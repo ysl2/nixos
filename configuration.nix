@@ -139,6 +139,7 @@
     all_proxy = lib.mkForce "socks5://127.0.0.1:20172";
     __NV_PRIME_RENDER_OFFLOAD = "1";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    NIXOS_OZONE_WL = "1";
   };
   environment.variables = {
     GTK_IM_MODULE = lib.mkForce "fcitx5";
