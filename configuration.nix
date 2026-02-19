@@ -185,6 +185,7 @@
     telegram-desktop
     udiskie
     unzip
+    vscode
     wechat
     wget
     wl-clipboard
